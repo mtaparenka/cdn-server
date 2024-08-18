@@ -4,6 +4,7 @@ import com.mtaparenka.cdnserver.service.ImageService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,8 +15,12 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @GetMapping(value = "/{imageName}", produces = {MediaType.IMAGE_JPEG_VALUE})
+    @GetMapping(value = "/content/{imageName}", produces = {MediaType.IMAGE_JPEG_VALUE})
     public byte[] getFile(@PathVariable String imageName) {
         return imageService.readImage(imageName);
     }
+
+    /*@PostMapping
+    public void uploadFile(byte[] file) {
+    }*/
 }
