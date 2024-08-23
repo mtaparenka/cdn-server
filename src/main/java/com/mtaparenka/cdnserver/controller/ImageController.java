@@ -18,8 +18,6 @@ public class ImageController {
 
     @GetMapping(value = "/content/images/{imageName}", produces = {MediaType.IMAGE_JPEG_VALUE})
     public byte[] getImage(@PathVariable String imageName) {
-        var img = imageService.readImage(imageName);
-        imageService.writeImage(new UploadData(img, imageName.split("\\.")[1]));
         return imageService.readImage(imageName);
     }
 
