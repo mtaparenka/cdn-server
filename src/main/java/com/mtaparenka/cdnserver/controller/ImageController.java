@@ -24,7 +24,7 @@ public class ImageController {
     }
 
     @PostMapping(value = "/content/images/upload", consumes = {MediaType.IMAGE_JPEG_VALUE})
-    public String uploadImage(UploadData uploadData) {
-        return imageService.writeImage(uploadData);
+    public void uploadImage(UploadData uploadData) {
+        imageService.writeImage(uploadData);
     }
 }
