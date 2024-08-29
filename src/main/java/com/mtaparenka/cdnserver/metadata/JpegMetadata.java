@@ -33,9 +33,10 @@ public class JpegMetadata {
     }
 
     private static String readAsciiTag(Tag tag, byte[] data, int tiffHeaderEnd) {
-        var tagStart = 0;
-        var i = 0;
-        var tagAddressHex = Integer.toHexString(tag.address);
+        int tagStart = 0;
+        int i = 0;
+        String tagAddressHex = Integer.toHexString(tag.address);
+
         byte tagFirstByte = (byte) (tagAddressHex.length() % 2 == 0
                 ? Integer.parseInt(tagAddressHex.substring(0, 2), 16)
                 : Integer.parseInt(tagAddressHex.substring(0, 1), 16));
@@ -55,14 +56,14 @@ public class JpegMetadata {
             return null;
         }
 
-        var tagOffsetIndex = tagStart + 8;
-        var tagOffsetStart = ((0xFF & data[tagOffsetIndex]) << 24)
+        int tagOffsetIndex = tagStart + 8;
+        int tagOffsetStart = ((0xFF & data[tagOffsetIndex]) << 24)
                 | ((0xFF & data[tagOffsetIndex + 1]) << 16)
                 | ((0xFF & data[tagOffsetIndex + 2]) << 8)
                 | (0xFF & data[tagOffsetIndex + 3])
                 + tiffHeaderEnd;
 
-        var tagOffsetEnd = tagOffsetStart;
+        int tagOffsetEnd = tagOffsetStart;
 
         while (data[tagOffsetEnd] != 0x00) {
             tagOffsetEnd++;
